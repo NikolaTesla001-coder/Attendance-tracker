@@ -1,0 +1,9 @@
+services:
+  mongodb:
+    image: mongo:8.3
+    container_name: attendance-tracker-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db_data:/data/db
+    restart: unless-stopped

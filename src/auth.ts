@@ -47,6 +47,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.role = user.role || "student";
         token.rollNo = user.rollNo;
         token.studentId = user.studentId;
+        token.picture = user.image; // Capture Google profile image URL
       }
       return token;
     },
@@ -55,6 +56,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.role = token.role as string;
         session.user.rollNo = token.rollNo as string | undefined;
         session.user.studentId = token.studentId as string | undefined;
+        session.user.image = token.picture as string | null; // Map Google profile image URL to session
       }
       return session;
     },

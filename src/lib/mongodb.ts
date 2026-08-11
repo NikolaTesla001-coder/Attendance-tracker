@@ -41,11 +41,11 @@ export async function connectToDatabase() {
     if (cached) {
       cached.conn = await cached.promise;
     }
-  } catch (e) {
+  } catch (e: any) {
     if (cached) {
       cached.promise = null;
     }
-    throw e;
+    throw new Error(`Database connection failed: ${e.message || e}. Please make sure your MongoDB instance is running.`);
   }
 
   return cached ? cached.conn : null;
