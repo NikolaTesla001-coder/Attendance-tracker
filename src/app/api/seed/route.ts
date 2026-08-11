@@ -57,8 +57,8 @@ export async function GET() {
         active: true,
       },
       {
-        rollNo: "107",
-        name: "Abhishek Patil Student",
+        rollNo: "003",
+        name: "Abhishek Patil",
         email: "abhishek.p.patil001@gmail.com",
         active: true,
       }

@@ -15,6 +15,18 @@ export async function getStudentStats() {
   }
 
   const studentId = session.user.studentId;
+  if (!studentId) {
+    return {
+      stats: {
+        present: 0,
+        absent: 0,
+        total: 0,
+        percentage: 0,
+      },
+      history: [],
+    };
+  }
+
   await connectToDatabase();
 
   let mjtClass = await Class.findOne({ code: "MJT" });
