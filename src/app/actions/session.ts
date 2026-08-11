@@ -86,10 +86,8 @@ export async function endSession(sessionId: string) {
   // Fetch all students and their attendance status for this session
   const records = await getSessionDetails(sessionId);
 
-  // Trigger Google Sheets sync in the background (fire and forget)
-  syncSessionToSheet(sessionDate, records).catch((error) => {
-    console.error("Background sync failed:", error);
-  });
+  // Trigger Google Sheets sync and await it (Vercel kills serverless functions if we don't await)
+  await syncSessionToSheet(sessionDate, records);
 
   return { success: true };
 }
