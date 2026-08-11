@@ -379,12 +379,11 @@ export default function ProfessorDashboardClient({ onSignOut, user }: Props) {
                     {window.location.origin}/attendance/{session?.token}
                   </div>
                 </div>
-
                 <div className="w-full flex justify-center pt-4 border-t border-slate-100 dark:border-slate-700 max-w-md">
                   <button
                     onClick={handleEndAttendance}
                     disabled={loading}
-                    className="w-full py-2.5 px-4 rounded-lg bg-red-650 dark:bg-red-700 hover:bg-red-500 dark:hover:bg-red-650 disabled:opacity-50 font-bold text-white text-xs transition-colors shadow-md active:scale-[0.98] cursor-pointer"
+                    className="w-full py-2.5 px-4 rounded-lg bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600 disabled:opacity-50 font-bold text-white text-xs transition-colors shadow-md active:scale-[0.98] cursor-pointer"
                   >
                     {loading ? "Ending Session..." : "End Session Early"}
                   </button>
@@ -398,7 +397,7 @@ export default function ProfessorDashboardClient({ onSignOut, user }: Props) {
                   
                   <div className="space-y-6">
                     {/* Timer */}
-                    <div className="text-center p-5 rounded-xl bg-slate-955 dark:bg-slate-900 text-white border border-slate-800 dark:border-slate-750">
+                    <div className="text-center p-5 rounded-xl bg-slate-900 dark:bg-slate-950 text-white border border-slate-800 dark:border-slate-750">
                       <span className="text-xxs text-emerald-400 dark:text-emerald-455 font-extrabold uppercase tracking-widest">TIME REMAINING</span>
                       <p className="text-4xl font-mono font-bold mt-1 text-white tracking-wider">{formatTime(timeLeft)}</p>
                     </div>
