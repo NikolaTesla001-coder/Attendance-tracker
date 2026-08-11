@@ -211,7 +211,20 @@ export default function ProfessorHistoryClient({ onSignOut, user }: Props) {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Left: Sessions List */}
             <div className="space-y-4">
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Conducted Sessions</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white">Conducted Sessions</h2>
+                <a 
+                  href="https://docs.google.com/spreadsheets/" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 font-bold text-xs border border-emerald-200 dark:border-emerald-800 transition-colors hover:bg-emerald-100 dark:hover:bg-emerald-900/50"
+                >
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/>
+                  </svg>
+                  Open Google Sheets
+                </a>
+              </div>
               {sessions.length > 0 ? (
                 <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-800 shadow-sm">
                   <table className="w-full text-left border-collapse">
