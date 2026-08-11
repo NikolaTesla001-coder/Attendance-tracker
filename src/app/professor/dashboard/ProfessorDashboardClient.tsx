@@ -162,20 +162,20 @@ export default function ProfessorDashboardClient({ onSignOut, user }: Props) {
     <div className="flex-1 flex flex-col justify-between bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-100 transition-colors">
       {/* Simplified, Clean Header Navbar */}
       <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 transition-colors">
-        <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           {/* Logo Brand */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/30 text-primary dark:text-blue-400 border border-blue-100 dark:border-blue-900/50">
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-955/30 text-primary dark:text-blue-400 border border-blue-100 dark:border-blue-900/50">
               <svg width={18} height={18} fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
               </svg>
             </div>
-            <span className="font-extrabold text-slate-900 dark:text-white tracking-tight">Attendance Tracker</span>
+            <span className="font-extrabold text-slate-900 dark:text-white tracking-tight hidden sm:block">Attendance Tracker</span>
           </div>
 
           {/* Clean Navigation Links & Theme Toggle & Profile Dropdown */}
-          <div className="flex items-center" style={{ gap: "24px" }}>
-            <nav className="flex items-center" style={{ gap: "24px" }}>
+          <div className="flex items-center gap-3 sm:gap-6">
+            <nav className="flex items-center gap-3 sm:gap-5">
               <Link
                 href="/professor/dashboard"
                 className="text-sm font-bold transition-all px-1 py-1 text-slate-905 dark:text-white border-b-2 border-slate-900 dark:border-white"
@@ -184,7 +184,7 @@ export default function ProfessorDashboardClient({ onSignOut, user }: Props) {
               </Link>
               <Link
                 href="/professor/history"
-                className="text-sm font-bold transition-all px-1 py-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                className="text-sm font-bold transition-all px-1 py-1 text-slate-550 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               >
                 History
               </Link>
@@ -285,13 +285,13 @@ export default function ProfessorDashboardClient({ onSignOut, user }: Props) {
       </div>
 
       {/* Main Content Dashboard Layout */}
-      <main className="flex-1 p-6 md:p-8 bg-slate-50 dark:bg-slate-900 max-w-4xl w-full mx-auto transition-colors">
+      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-slate-50 dark:bg-slate-900 max-w-4xl w-full mx-auto transition-colors">
         <div className="animate-fade-in space-y-8">
           {!isSessionActive ? (
             <div className="grid md:grid-cols-3 gap-8">
               {/* Left Main Card (Start Session) */}
               <div className="md:col-span-2 space-y-6">
-                <div className="p-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6 transition-colors">
+                <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6 transition-colors">
                   <div className="space-y-3">
                     <h2 className="text-xl font-bold text-slate-900 dark:text-white">Create Attendance Session</h2>
                     <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -330,13 +330,13 @@ export default function ProfessorDashboardClient({ onSignOut, user }: Props) {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center py-1">
                       <span className="text-sm text-slate-505 dark:text-slate-400 font-semibold">Total Students</span>
-                      <span className="text-base font-extrabold text-slate-950 dark:text-slate-200 bg-slate-100 dark:bg-slate-900 px-2.5 py-0.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                      <span className="text-base font-extrabold text-slate-955 dark:text-slate-200 bg-slate-100 dark:bg-slate-900 px-2.5 py-0.5 rounded-lg border border-slate-200 dark:border-slate-700">
                         {registeredCount}
                       </span>
                     </div>
                     <div className="flex justify-between items-center py-1">
                       <span className="text-sm text-slate-505 dark:text-slate-400 font-semibold">Present Today</span>
-                      <span className="text-base font-extrabold text-emerald-600 bg-emerald-50 dark:bg-emerald-955/20 px-2.5 py-0.5 rounded-lg border border-emerald-100 dark:border-emerald-900/30">
+                      <span className="text-base font-extrabold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/20 px-2.5 py-0.5 rounded-lg border border-emerald-100 dark:border-emerald-900/30">
                         {summaryStats.presentToday}
                       </span>
                     </div>
@@ -353,7 +353,7 @@ export default function ProfessorDashboardClient({ onSignOut, user }: Props) {
           ) : (
             <div className="grid md:grid-cols-3 gap-8">
               {/* Active Session Display */}
-              <div className="md:col-span-2 flex flex-col items-center justify-center p-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6 text-center transition-colors">
+              <div className="md:col-span-2 flex flex-col items-center justify-center p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6 text-center transition-colors">
                 <div>
                   <span className="inline-flex px-3 py-1 text-xs font-bold text-emerald-700 dark:text-emerald-455 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/50 rounded-full uppercase tracking-wider animate-pulse">
                     ● ATTENDANCE SESSION ACTIVE
@@ -379,6 +379,7 @@ export default function ProfessorDashboardClient({ onSignOut, user }: Props) {
                     {window.location.origin}/attendance/{session?.token}
                   </div>
                 </div>
+
                 <div className="w-full flex justify-center pt-4 border-t border-slate-100 dark:border-slate-700 max-w-md">
                   <button
                     onClick={handleEndAttendance}

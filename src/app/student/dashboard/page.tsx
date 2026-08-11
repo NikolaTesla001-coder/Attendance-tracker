@@ -79,7 +79,7 @@ export default async function StudentDashboard() {
               <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-800 shadow-sm transition-colors">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-slate-550 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+                    <tr className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
                       <th className="py-3.5 px-4">Date</th>
                       <th className="py-3.5 px-4 text-right">Status</th>
                     </tr>
@@ -87,7 +87,7 @@ export default async function StudentDashboard() {
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                     {history.map((record) => (
                       <tr key={record.id} className="text-sm font-semibold hover:bg-slate-50/50 dark:hover:bg-slate-700/30 text-slate-700 dark:text-slate-300 transition-colors">
-                        <td className="py-4 px-4 font-bold text-slate-800 dark:text-slate-250">
+                        <td className="py-4 px-4 font-bold text-slate-800 dark:text-slate-200">
                           <div className="flex items-center gap-3">
                             <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 flex items-center justify-center border border-slate-200/50 dark:border-slate-800 transition-colors">
                               <svg width={14} height={14} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -99,10 +99,10 @@ export default async function StudentDashboard() {
                         </td>
                         <td className="py-4 px-4 text-right">
                           <span
-                            className={`inline-flex items-center gap-1.5 px-3 py-1.2 rounded-full border transition-all text-xs font-bold ${
+                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all text-xs font-bold ${
                               record.status === "PRESENT"
-                                ? "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-450 border-emerald-200 dark:border-emerald-900/30"
-                                : "bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-455 border-rose-200 dark:border-rose-900/30"
+                                ? "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/30"
+                                : "bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-900/30"
                             }`}
                           >
                             <span className={`w-1.5 h-1.5 rounded-full ${record.status === "PRESENT" ? "bg-emerald-500" : "bg-rose-500"}`} />
@@ -124,7 +124,7 @@ export default async function StudentDashboard() {
       </main>
 
       {/* Footer */}
-      <footer className="py-6 text-center text-xs font-semibold text-slate-400 dark:text-slate-550 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors mt-8">
+      <footer className="py-6 text-center text-xs font-semibold text-slate-400 dark:text-slate-500 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors mt-8">
         © 2026 Attendance Tracker • Materials Joining Technology Portal.
       </footer>
     </div>

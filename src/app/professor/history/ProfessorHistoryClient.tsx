@@ -78,20 +78,20 @@ export default function ProfessorHistoryClient({ onSignOut, user }: Props) {
     <div className="flex-1 flex flex-col justify-between bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-100 transition-colors">
       {/* Simplified, Clean Header Navbar */}
       <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 transition-colors">
-        <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           {/* Logo Brand */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/30 text-primary dark:text-blue-400 border border-blue-100 dark:border-blue-900/50">
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-95/30 text-primary dark:text-blue-400 border border-blue-100 dark:border-blue-900/50">
               <svg width={18} height={18} fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
               </svg>
             </div>
-            <span className="font-extrabold text-slate-900 dark:text-white tracking-tight">Attendance Tracker</span>
+            <span className="font-extrabold text-slate-900 dark:text-white tracking-tight hidden sm:block">Attendance Tracker</span>
           </div>
 
           {/* Clean Navigation Links & Theme Toggle & Profile Dropdown */}
-          <div className="flex items-center" style={{ gap: "24px" }}>
-            <nav className="flex items-center" style={{ gap: "24px" }}>
+          <div className="flex items-center gap-3 sm:gap-6">
+            <nav className="flex items-center gap-3 sm:gap-5">
               <Link
                 href="/professor/dashboard"
                 className="text-sm font-bold transition-all px-1 py-1 text-slate-505 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -201,7 +201,7 @@ export default function ProfessorHistoryClient({ onSignOut, user }: Props) {
       </div>
 
       {/* Main Content History Sheet */}
-      <main className="flex-1 p-6 md:p-8 bg-slate-50 dark:bg-slate-900 max-w-4xl w-full mx-auto transition-colors">
+      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-slate-50 dark:bg-slate-900 max-w-4xl w-full mx-auto transition-colors">
         {loadingSessions ? (
           <div className="flex flex-col items-center justify-center py-16 gap-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
             <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
@@ -229,7 +229,7 @@ export default function ProfessorHistoryClient({ onSignOut, user }: Props) {
                           onClick={() => setSelectedSession(sessionRecord.id)}
                           className={`text-sm font-semibold transition-colors cursor-pointer ${
                             selectedSession === sessionRecord.id 
-                              ? "bg-blue-50/50 dark:bg-blue-950/20 text-primary dark:text-blue-400 border-l-4 border-primary dark:border-blue-500" 
+                              ? "bg-blue-50/50 dark:bg-blue-955/20 text-primary dark:text-blue-400 border-l-4 border-primary dark:border-blue-500" 
                               : "hover:bg-slate-50 dark:hover:bg-slate-700/50 text-slate-700 dark:text-slate-300"
                           }`}
                         >
@@ -313,7 +313,7 @@ export default function ProfessorHistoryClient({ onSignOut, user }: Props) {
                               <span
                                 className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xxs font-bold rounded-full border ${
                                   student.status === "PRESENT"
-                                    ? "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-450 border-emerald-200 dark:border-emerald-900/30"
+                                    ? "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-455 border-emerald-200 dark:border-emerald-900/30"
                                     : "bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-455 border-rose-200 dark:border-rose-900/30"
                                 }`}
                               >

@@ -20,20 +20,20 @@ export default function StudentHeaderClient({ onSignOut, user }: Props) {
 
   return (
     <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 transition-colors">
-      <div className="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo Brand */}
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/30 text-primary dark:text-blue-400 border border-blue-100 dark:border-blue-900/50">
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-955/30 text-primary dark:text-blue-400 border border-blue-100 dark:border-blue-900/50">
             <svg width={18} height={18} fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
             </svg>
           </div>
-          <span className="font-extrabold text-slate-900 tracking-tight dark:text-white">Attendance Tracker</span>
+          <span className="font-extrabold text-slate-900 dark:text-white tracking-tight hidden sm:block">Attendance Tracker</span>
         </div>
 
         {/* Clean Student Portal indicators & Theme Toggle & Dropdown */}
-        <div className="flex items-center gap-4">
-          <span className="text-xs font-bold text-slate-400 dark:text-slate-550 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 px-2 py-0.5 rounded uppercase tracking-wider">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <span className="text-xs font-bold text-slate-400 dark:text-slate-550 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 px-2 py-0.5 rounded uppercase tracking-wider flex-shrink-0">
             Student
           </span>
 
