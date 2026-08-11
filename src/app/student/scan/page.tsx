@@ -11,29 +11,23 @@ export default function StudentScanPage() {
   const [permissionError, setPermissionError] = useState<boolean>(false);
 
   useEffect(() => {
-    let scannerInstance: any = null;
+    let html5QrCode: any = null;
 
     import("html5-qrcode")
-      .then(({ Html5QrcodeScanner }) => {
-        scannerInstance = new Html5QrcodeScanner(
-          "reader",
+      .then(({ Html5Qrcode }) => {
+        html5QrCode = new Html5Qrcode("reader");
+        
+        html5QrCode.start(
+          { facingMode: "environment" }, // Force rear camera
           {
             fps: 10,
             qrbox: { width: 220, height: 220 },
             aspectRatio: 1.0,
-            showTorchButtonIfSupported: true,
-            videoConstraints: {
-              facingMode: "environment", // Enforce back/rear camera on mobile
-            },
           },
-          false
-        );
-
-        scannerInstance.render(
           (decodedText: string) => {
-            if (scannerInstance) {
-              scannerInstance
-                .clear()
+            if (html5QrCode) {
+              html5QrCode
+                .stop()
                 .then(() => {
                   if (decodedText.startsWith(window.location.origin) || decodedText.includes("/attendance/")) {
                     router.push(decodedText);
@@ -43,7 +37,7 @@ export default function StudentScanPage() {
                   }
                 })
                 .catch((err: any) => {
-                  console.error("Error clearing scanner:", err);
+                  console.error("Error stopping scanner:", err);
                   router.push(decodedText);
                 });
             }
@@ -51,7 +45,10 @@ export default function StudentScanPage() {
           () => {
             // Suppress noisy frame scan mismatch logs
           }
-        );
+        ).catch((err: any) => {
+          console.error("Failed to start scanner:", err);
+          setPermissionError(true);
+        });
       })
       .catch((err) => {
         console.error("Failed to load html5-qrcode package:", err);
@@ -59,9 +56,9 @@ export default function StudentScanPage() {
       });
 
     return () => {
-      if (scannerInstance) {
-        scannerInstance
-          .clear()
+      if (html5QrCode && html5QrCode.isScanning) {
+        html5QrCode
+          .stop()
           .catch((err: any) => console.error("Error during scanner cleanup:", err));
       }
     };
@@ -84,9 +81,9 @@ export default function StudentScanPage() {
             <p className="text-sm text-slate-505 dark:text-slate-400 font-medium">Align the classroom QR code inside the box to scan.</p>
           </div>
 
-          {/* Centered responsive camera reader display box */}
-          <div className="w-full max-w-[320px] mx-auto rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-2 overflow-hidden shadow-inner [&_video]:rounded-xl [&_video]:object-cover [&_video]:w-full [&_video]:h-full [&_button]:bg-primary [&_button]:hover:bg-primary-hover [&_button]:text-white [&_button]:px-4 [&_button]:py-2.5 [&_button]:rounded-lg [&_button]:font-bold [&_button]:text-xs [&_button]:cursor-pointer [&_button]:shadow-sm [&_select]:bg-white [&_select]:dark:bg-slate-800 [&_select]:border [&_select]:border-slate-300 [&_select]:dark:border-slate-700 [&_select]:rounded-lg [&_select]:px-3 [&_select]:py-2 [&_select]:text-xs [&_select]:cursor-pointer [&_#reader]:border-none [&_#reader__scan_region]:flex [&_#reader__scan_region]:justify-center [&_#reader__scan_region]:items-center relative aspect-square flex items-center justify-center">
-            <div id="reader" className="w-full" />
+          {/* Clean camera reader wrapper */}
+          <div className="w-full max-w-[320px] mx-auto rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-2 overflow-hidden shadow-inner relative aspect-square [&_#reader]:border-none [&_video]:rounded-xl [&_video]:object-cover [&_video]:w-full [&_video]:h-full">
+            <div id="reader" className="w-full h-full overflow-hidden rounded-xl" />
             
             {scanError && (
               <div className="absolute inset-0 bg-white/95 dark:bg-slate-900/95 flex items-center justify-center p-4">
