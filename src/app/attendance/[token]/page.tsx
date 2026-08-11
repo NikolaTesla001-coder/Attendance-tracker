@@ -70,7 +70,7 @@ export default async function AttendanceTokenPage({ params }: Props) {
 
       {/* Footer */}
       <footer className="py-6 text-center text-xs font-medium text-slate-400 border-t border-slate-200 bg-white">
-        © 2026 OneTap Checkin • Secured with Google OAuth & Real-time DB Validation.
+        Made with 🍵 by Abhishek
       </footer>
     </div>
   );

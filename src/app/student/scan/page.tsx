@@ -121,7 +121,7 @@ export default function StudentScanPage() {
 
       {/* Footer */}
       <footer className="py-6 text-center text-xs font-medium text-slate-400 dark:text-slate-500 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors">
-        © 2026 Attendance Tracker • Secured with Google OAuth & Real-time DB Validation.
+        Made with 🍵 by Abhishek
       </footer>
     </div>
   );

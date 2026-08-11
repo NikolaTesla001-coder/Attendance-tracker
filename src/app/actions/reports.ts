@@ -161,6 +161,7 @@ export async function getSessionDetails(sessionId: string) {
     return {
       rollNo: s.rollNo,
       name: s.name,
+      email: s.email,
       status: isPresent ? ("PRESENT" as const) : ("ABSENT" as const),
     };
   });

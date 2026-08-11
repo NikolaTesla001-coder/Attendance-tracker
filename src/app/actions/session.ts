@@ -58,12 +58,37 @@ export async function startSession() {
   };
 }
 
+import { syncSessionToSheet } from "@/lib/googleSheets";
+import { getSessionDetails } from "./reports";
+
 export async function endSession(sessionId: string) {
   await verifyProfessor();
   await connectToDatabase();
 
+  const session = await AttendanceSession.findById(sessionId);
+  if (!session) {
+    throw new Error("Session not found");
+  }
+
   await AttendanceSession.findByIdAndUpdate(sessionId, {
     $set: { active: false },
+  });
+
+  // Format the date for the spreadsheet
+  const sessionDate = new Date(session.createdAt).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  // Fetch all students and their attendance status for this session
+  const records = await getSessionDetails(sessionId);
+
+  // Trigger Google Sheets sync in the background (fire and forget)
+  syncSessionToSheet(sessionDate, records).catch((error) => {
+    console.error("Background sync failed:", error);
   });
 
   return { success: true };

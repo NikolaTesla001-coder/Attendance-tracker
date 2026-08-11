@@ -352,7 +352,7 @@ export default function ProfessorHistoryClient({ onSignOut, user }: Props) {
 
       {/* Footer */}
       <footer className="py-6 text-center text-xs font-semibold text-slate-405 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors">
-        © 2026 Attendance Tracker • Materials Joining Technology Portal.
+        Made with 🍵 by Abhishek
       </footer>
     </div>
   );
