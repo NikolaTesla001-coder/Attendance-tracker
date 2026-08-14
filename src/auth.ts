@@ -21,9 +21,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       const emailLower = user.email.toLowerCase();
 
       // 1. Check if professor
-      if (process.env.PROFESSOR_EMAIL && emailLower === process.env.PROFESSOR_EMAIL.toLowerCase()) {
-        user.role = "professor";
-        return true;
+      if (process.env.PROFESSOR_EMAIL) {
+        const professorEmails = process.env.PROFESSOR_EMAIL.split(",").map(e => e.trim().toLowerCase());
+        if (professorEmails.includes(emailLower)) {
+          user.role = "professor";
+          return true;
+        }
       }
 
       // 2. Check if whitelisted student

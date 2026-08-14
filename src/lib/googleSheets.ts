@@ -11,8 +11,8 @@ function getSheetsClient() {
     throw new Error("Missing Google Sheets API credentials in environment variables.");
   }
 
-  // Environment variables sometimes escape newline characters. Ensure they are actual newlines.
-  privateKey = privateKey.replace(/\\n/g, "\n");
+  // Environment variables sometimes escape newline characters or have extra quotes.
+  privateKey = privateKey.replace(/\\n/g, "\n").replace(/^"|"$/g, "").trim();
 
   const auth = new google.auth.GoogleAuth({
     credentials: {
