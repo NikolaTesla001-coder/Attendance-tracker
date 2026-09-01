@@ -112,6 +112,24 @@ export async function getActiveSessionState() {
   });
 
   if (!session) {
+    // Check if there is a session that has naturally expired but wasn't properly ended.
+    // This happens if the 5-minute timer runs out without the user clicking "End Session".
+    const expiredSession = await AttendanceSession.findOne({
+      classId: mjtClass._id,
+      active: true,
+      expiresAt: { $lte: new Date() },
+    });
+
+    if (expiredSession) {
+      console.log(`Found naturally expired session ${expiredSession._id}. Auto-syncing to Google Sheets...`);
+      try {
+        // This will set active to false and trigger the Google Sheets sync
+        await endSession(expiredSession._id.toString());
+      } catch (err) {
+        console.error("Failed to auto-end expired session:", err);
+      }
+    }
+
     return null;
   }
 
