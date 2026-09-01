@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import Student from "@/models/Student";
 import Class from "@/models/Class";
+import AttendanceSession from "@/models/AttendanceSession";
+import Attendance from "@/models/Attendance";
 
 export async function GET() {
   try {
@@ -16,8 +18,10 @@ export async function GET() {
       });
     }
 
-    // 2. Clear existing students and seed a list of 4 students
+    // 2. Clear ALL existing data for a completely fresh start
     await Student.deleteMany({});
+    await AttendanceSession.deleteMany({});
+    await Attendance.deleteMany({});
 
     const students = [
       {
