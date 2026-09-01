@@ -26,7 +26,6 @@ export default async function AttendanceTokenPage({ params }: Props) {
               {COURSE.code} Check-in
             </span>
             <h1 className="text-2xl font-bold mt-2 text-slate-900">Attendance Verification</h1>
-            <p className="text-xxs text-slate-400 font-mono mt-1">Session Token: {token.slice(0, 8)}...</p>
           </div>
 
           {result.success ? (
