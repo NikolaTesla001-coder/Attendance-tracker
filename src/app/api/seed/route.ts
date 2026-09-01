@@ -18,7 +18,7 @@ export async function GET() {
 
     // 2. Clear existing students and seed a list of 4 students
     await Student.deleteMany({});
-    
+
     const students = [
       {
         rollNo: "106",
