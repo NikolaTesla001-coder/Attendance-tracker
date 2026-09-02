@@ -12,6 +12,8 @@ export default function StudentScanPage() {
 
   useEffect(() => {
     let html5QrCode: any = null;
+    let onTouchStart: ((e: TouchEvent) => void) | null = null;
+    let onTouchMove: ((e: TouchEvent) => void) | null = null;
 
     import("html5-qrcode")
       .then(({ Html5Qrcode }) => {
@@ -45,7 +47,66 @@ export default function StudentScanPage() {
           () => {
             // Suppress noisy frame scan mismatch logs
           }
-        ).catch((err: any) => {
+        )
+        .then(() => {
+          const readerElement = document.getElementById("reader");
+          if (readerElement) {
+            let currentZoom = 1;
+            let initialPinchDistance = 0;
+
+            try {
+              const capabilities = html5QrCode.getRunningTrackCameraCapabilities();
+              if (capabilities && capabilities.zoom) {
+                currentZoom = capabilities.zoom.min || 1;
+              }
+            } catch (e) {}
+
+            onTouchStart = (e: TouchEvent) => {
+              if (e.touches.length === 2) {
+                initialPinchDistance = Math.hypot(
+                  e.touches[0].clientX - e.touches[1].clientX,
+                  e.touches[0].clientY - e.touches[1].clientY
+                );
+              }
+            };
+
+            onTouchMove = (e: TouchEvent) => {
+              if (e.touches.length === 2) {
+                e.preventDefault(); // Prevent page zooming
+                const currentDistance = Math.hypot(
+                  e.touches[0].clientX - e.touches[1].clientX,
+                  e.touches[0].clientY - e.touches[1].clientY
+                );
+                
+                if (initialPinchDistance > 0) {
+                  const scale = currentDistance / initialPinchDistance;
+                  
+                  try {
+                    const capabilities = html5QrCode.getRunningTrackCameraCapabilities();
+                    if (capabilities && capabilities.zoom) {
+                      const minZoom = capabilities.zoom.min || 1;
+                      const maxZoom = capabilities.zoom.max || 5;
+                      
+                      let newZoom = currentZoom * scale;
+                      newZoom = Math.max(minZoom, Math.min(newZoom, maxZoom));
+                      
+                      html5QrCode.applyVideoConstraints({
+                        advanced: [{ zoom: newZoom }]
+                      });
+                      
+                      currentZoom = newZoom;
+                      initialPinchDistance = currentDistance;
+                    }
+                  } catch (err) {}
+                }
+              }
+            };
+
+            readerElement.addEventListener("touchstart", onTouchStart, { passive: false });
+            readerElement.addEventListener("touchmove", onTouchMove, { passive: false });
+          }
+        })
+        .catch((err: any) => {
           console.error("Failed to start scanner:", err);
           setPermissionError(true);
         });
@@ -56,6 +117,12 @@ export default function StudentScanPage() {
       });
 
     return () => {
+      const readerElement = document.getElementById("reader");
+      if (readerElement && onTouchStart && onTouchMove) {
+        readerElement.removeEventListener("touchstart", onTouchStart as EventListener);
+        readerElement.removeEventListener("touchmove", onTouchMove as EventListener);
+      }
+
       if (html5QrCode && html5QrCode.isScanning) {
         html5QrCode
           .stop()
@@ -78,7 +145,7 @@ export default function StudentScanPage() {
               {COURSE.code} Check-in
             </span>
             <h1 className="text-2xl font-bold mt-2 text-slate-900 dark:text-white">Scan QR Code</h1>
-            <p className="text-sm text-slate-505 dark:text-slate-400 font-medium">Align the classroom QR code inside the box to scan.</p>
+            <p className="text-sm text-slate-505 dark:text-slate-400 font-medium">Align the classroom QR code inside the box to scan. You can pinch with two fingers to zoom.</p>
           </div>
 
           {/* Clean camera reader wrapper */}
